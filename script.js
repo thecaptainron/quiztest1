@@ -129,4 +129,8 @@ function showResults() {
 
   // Clear storage after rendering
   localStorage.clear();
+  
+  // Show study notes link after results
+document.getElementById("studyNotesLink").style.display = "block";
+
 }
