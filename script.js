@@ -17,9 +17,10 @@ fetch("questions.json")
     loadQuestion();
   });
 
+// Load current question
 function loadQuestion() {
   if (currentQuestion >= questions.length) { 
-    progressDiv.style.width = "100%"; // Ensure progress bar shows full
+    progressDiv.style.width = "100%"; 
     showResults(); 
     return; 
   }
@@ -32,10 +33,13 @@ function loadQuestion() {
   }
   html += "</ul>";
   quizDiv.innerHTML = html;
+
   nextBtn.textContent = currentQuestion === questions.length - 1 ? "Finish" : "Next Question";
+
   updateProgress();
 }
 
+// Handle Next Question button
 nextBtn.addEventListener('click', () => {
   const selected = document.querySelector('input[name="answer"]:checked');
   if (!selected) { 
@@ -46,6 +50,7 @@ nextBtn.addEventListener('click', () => {
   const q = questions[currentQuestion];
   const isCorrect = selected.value === q.correct;
 
+  // Save answer
   userAnswers[currentQuestion] = { questionId: q.id, selected: selected.value, correct: isCorrect };
   weakAreas[q.topic].total++;
   if (isCorrect) weakAreas[q.topic].correct++;
@@ -56,11 +61,13 @@ nextBtn.addEventListener('click', () => {
   loadQuestion();
 });
 
+// Update progress bar
 function updateProgress() {
   const percent = ((currentQuestion) / questions.length) * 100;
   progressDiv.style.width = percent + "%";
 }
 
+// Show results and study plan
 function showResults() {
   quizDiv.innerHTML = "";
   nextBtn.style.display = "none";
@@ -120,6 +127,6 @@ function showResults() {
 
   resultsDiv.innerHTML = html;
 
-  // Clear localStorage only after rendering results
+  // Clear storage after rendering
   localStorage.clear();
 }
