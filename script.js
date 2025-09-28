@@ -8,6 +8,7 @@ const nextBtn = document.getElementById('nextBtn');
 const resultsDiv = document.getElementById('results');
 const progressDiv = document.getElementById('progress');
 
+// Load questions
 fetch("questions.json")
   .then(response => response.json())
   .then(data => {
@@ -18,10 +19,11 @@ fetch("questions.json")
 
 function loadQuestion() {
   if (currentQuestion >= questions.length) { 
-    progressDiv.style.width = "100%"; // Make sure progress shows complete
+    progressDiv.style.width = "100%"; // Ensure progress bar shows full
     showResults(); 
     return; 
   }
+
   const q = questions[currentQuestion];
   let html = `<div class="question"><strong>Topic: ${q.topic}</strong><p>${q.question}</p></div><ul class="options">`;
   for (let key in q.options) {
@@ -33,6 +35,26 @@ function loadQuestion() {
   nextBtn.textContent = currentQuestion === questions.length - 1 ? "Finish" : "Next Question";
   updateProgress();
 }
+
+nextBtn.addEventListener('click', () => {
+  const selected = document.querySelector('input[name="answer"]:checked');
+  if (!selected) { 
+    alert("Please select an answer."); 
+    return; 
+  }
+
+  const q = questions[currentQuestion];
+  const isCorrect = selected.value === q.correct;
+
+  userAnswers[currentQuestion] = { questionId: q.id, selected: selected.value, correct: isCorrect };
+  weakAreas[q.topic].total++;
+  if (isCorrect) weakAreas[q.topic].correct++;
+
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+
+  currentQuestion++;
+  loadQuestion();
+});
 
 function updateProgress() {
   const percent = ((currentQuestion) / questions.length) * 100;
@@ -98,6 +120,6 @@ function showResults() {
 
   resultsDiv.innerHTML = html;
 
-  // Only clear localStorage after rendering results
+  // Clear localStorage only after rendering results
   localStorage.clear();
 }
