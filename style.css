@@ -1,67 +1,94 @@
-body { 
-  font-family: Arial, sans-serif; 
-  background: #f9f9f9; 
-  margin:0; padding:0; 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9fb;
+  margin: 0;
+  padding: 0;
 }
-.container { 
-  max-width:700px; 
-  margin: 30px auto; 
-  background:white; 
-  padding:20px; 
-  border-radius:10px; 
-  box-shadow:0 0 15px rgba(0,0,0,0.1); 
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-h1 { 
-  text-align:center; 
-  color:#4CAF50; 
-  margin-bottom:20px;
+
+h1, h2, h3 {
+  text-align: center;
+  color: #333;
 }
-.progress-bar { 
-  width:100%; 
-  background:#eee; 
-  border-radius:10px; 
-  margin-bottom:20px; 
-  height:20px;
-  overflow:hidden;
+
+.question-block {
+  margin-bottom: 20px;
 }
-#progress { 
-  height:100%; 
-  background:#4CAF50; 
-  width:0%; 
-  transition: width 0.3s; 
+
+.question-text {
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
-.question { 
-  margin-bottom:20px; 
+
+ul.options {
+  list-style: none;
+  padding: 0;
 }
-.options { 
-  list-style:none; 
-  padding:0; 
+
+ul.options li {
+  margin-bottom: 10px;
 }
-.options li { 
-  margin-bottom:10px; 
+
+label {
+  cursor: pointer;
 }
-button { 
-  padding:10px 20px; 
-  background:#4CAF50; 
-  color:white; 
-  border:none; 
-  border-radius:5px; 
-  cursor:pointer; 
+
+.btn {
+  display: inline-block;
+  background-color: #0073e6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background 0.3s;
 }
-button:disabled { 
-  background:#ccc; 
-  cursor:not-allowed; 
+
+.btn:hover {
+  background-color: #005bb5;
 }
-.result { 
-  margin-top:20px; 
-  padding:15px; 
-  border-radius:8px; 
+
+.progress-bar {
+  height: 20px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
-.correct { 
-  background:#e8f5e9; 
-  font-weight:bold; 
-  color:#4CAF50; 
+
+#progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, red, yellow, green);
+  transition: width 0.5s ease-in-out;
 }
-.incorrect { 
-  background:#ffebee; 
+
+.result.correct {
+  border-left: 5px solid green;
+  background: #e6ffe6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.result.incorrect {
+  border-left: 5px solid red;
+  background: #ffe6e6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#studyNotesLink {
+  text-align: center;
+  margin-top: 20px;
 }
