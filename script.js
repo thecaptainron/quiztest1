@@ -1,104 +1,105 @@
 let questions = [];
-let currentQuestionIndex = 0;
+let currentQuestion = 0;
 let userAnswers = [];
+let weakAreas = {};
+
+const quizDiv = document.getElementById('quiz');
+const resultsDiv = document.getElementById('results');
+const progressDiv = document.getElementById('progress');
+const nextBtn = document.getElementById('nextBtn');
 
 // Load questions
 fetch("questions.json")
   .then(response => response.json())
   .then(data => {
     questions = data;
-    showQuestion();
-    updateProgress();
+    questions.forEach(q => weakAreas[q.topic] = { correct: 0, total: 0 });
+    loadQuestion();
   });
 
-function showQuestion() {
-  const container = document.getElementById("quiz");
-  const question = questions[currentQuestionIndex];
-  if (!question) return;
+function loadQuestion() {
+  if (currentQuestion >= questions.length) {
+    progressDiv.style.width = "100%";
+    showResults();
+    return;
+  }
 
-  container.innerHTML = `
-    <div class="question-block">
-      <h2>Question ${currentQuestionIndex + 1} of ${questions.length}</h2>
-      <p class="question-text">${question.question}</p>
-      <ul class="options">
-        ${question.options
-          .map(
-            (opt, i) => `
-          <li>
-            <label>
-              <input type="radio" name="answer" value="${i}">
-              ${opt}
-            </label>
-          </li>`
-          )
-          .join("")}
-      </ul>
-      <button onclick="nextQuestion()" class="btn">Next Question</button>
-    </div>
-  `;
+  const q = questions[currentQuestion];
+  let html = `<div class="question"><strong>Topic: ${q.topic}</strong><p>${q.question}</p></div><ul class="options">`;
+  for (let key in q.options) {
+    const checked = userAnswers[currentQuestion]?.selected === key ? "checked" : "";
+    html += `<li><label><input type="radio" name="answer" value="${key}" ${checked}> ${key}: ${q.options[key]}</label></li>`;
+  }
+  html += "</ul>";
+  quizDiv.innerHTML = html;
+
+  nextBtn.textContent = currentQuestion === questions.length - 1 ? "Finish" : "Next Question";
+
+  updateProgress();
 }
 
-function nextQuestion() {
-  const selected = document.querySelector("input[name='answer']:checked");
+// Next Question button
+nextBtn.addEventListener('click', () => {
+  const selected = document.querySelector('input[name="answer"]:checked');
   if (!selected) {
     alert("Please select an answer.");
     return;
   }
 
-  const answer = parseInt(selected.value);
-  userAnswers[currentQuestionIndex] = answer;
+  const q = questions[currentQuestion];
+  const isCorrect = selected.value === q.correct;
 
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    showQuestion();
-    updateProgress();
-  } else {
-    showResults();
-  }
-}
+  userAnswers[currentQuestion] = { questionId: q.id, selected: selected.value, correct: isCorrect };
+  weakAreas[q.topic].total++;
+  if (isCorrect) weakAreas[q.topic].correct++;
+
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+
+  currentQuestion++;
+  loadQuestion();
+});
 
 function updateProgress() {
-  const progress = document.getElementById("progress");
-  const percent = ((currentQuestionIndex) / questions.length) * 100;
-  progress.style.width = `${percent}%`;
+  const percent = ((currentQuestion) / questions.length) * 100;
+  progressDiv.style.width = percent + "%";
 }
 
 function showResults() {
-  const container = document.getElementById("quiz");
-  let score = 0;
-  let studyPlan = {};
-  let missedQuestions = [];
+  quizDiv.innerHTML = "";
+  nextBtn.style.display = "none";
 
-  questions.forEach((q, i) => {
-    const correct = userAnswers[i] === q.answer;
-    if (correct) {
-      score++;
-    } else {
-      // Count misses by category
-      studyPlan[q.category] = (studyPlan[q.category] || 0) + 1;
-      // Store missed question with user answer
-      q.userAnswer = userAnswers[i];
-      missedQuestions.push(q);
+  let html = "<h2>Results</h2>";
+
+  let missedQuestions = {};
+  questions.forEach((q, index) => {
+    const user = userAnswers[index]?.selected || "No Answer";
+    const isCorrect = user === q.correct;
+    if (!isCorrect) {
+      missedQuestions[q.topic] = missedQuestions[q.topic] || [];
+      missedQuestions[q.topic].push({ ...q, userAnswer: user });
     }
+
+    html += `<div class="result ${isCorrect ? "correct" : "incorrect"}">`;
+    html += `<strong>Topic:</strong> ${q.topic}<br>`;
+    html += `<strong>Q:</strong> ${q.question}<br>`;
+    html += `<strong>Your answer:</strong> ${user} - ${q.options[user] || "Not answered"}<br>`;
+    html += `<strong>Correct answer:</strong> ${q.correct} - ${q.options[q.correct]}<br>`;
+    html += `<strong>Explanation:</strong> ${q.explanation}</div><br>`;
   });
 
-  container.innerHTML = `
-    <h2>Results</h2>
-    <p>You scored ${score} out of ${questions.length}.</p>
-    <h3>Study Plan</h3>
-    ${
-      Object.keys(studyPlan).length === 0
-        ? "<p>Great job! No weak categories 🎉</p>"
-        : `<ul>${Object.entries(studyPlan)
-            .map(([cat, count]) => `<li>${cat}: ${count} missed</li>`)
-            .join("")}</ul>`
-    }
-  `;
+  html += "<h3>Study Plan</h3><ul>";
+  for (let topic in weakAreas) {
+    const t = weakAreas[topic];
+    const percent = t.total ? Math.round((t.correct / t.total) * 100) : 0;
+    html += `<li>${topic}: ${percent}% correct (${t.correct} of ${t.total})</li>`;
+  }
+  html += "</ul>";
 
-  // Save to localStorage for notes page
-  localStorage.setItem("studyPlan", JSON.stringify(studyPlan));
+  resultsDiv.innerHTML = html;
+
+  // Save weak areas + missed questions for dynamic notes page
+  localStorage.setItem("studyPlan", JSON.stringify(weakAreas));
   localStorage.setItem("missedQuestions", JSON.stringify(missedQuestions));
 
-  // Show study notes link
   document.getElementById("studyNotesLink").style.display = "block";
 }
