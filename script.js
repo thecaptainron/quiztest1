@@ -58,7 +58,7 @@ function showResults() {
 
   let html = "<h2>Results</h2>";
 
-  // Show individual question results
+  // Individual question results
   questions.forEach((q, index) => {
     const user = userAnswers[index]?.selected || "No Answer";
     const isCorrect = user === q.correct;
@@ -70,13 +70,55 @@ function showResults() {
     html += `<strong>Explanation:</strong> ${q.explanation}</div><br>`;
   });
 
-  // Show weak area summary
+  // Performance by topic
   html += "<h3>Performance by Topic</h3><ul>";
   for (let topic in weakAreas) {
     const t = weakAreas[topic];
     const percent = t.total ? Math.round((t.correct / t.total) * 100) : 0;
     html += `<li>${topic}: ${percent}% correct (${t.correct} of ${t.total})</li>`;
   }
+  html += "</ul>";
+
+  // Generate Study Plan
+  html += "<h3>Your Personalized Study Plan</h3><ul>";
+  // Sort topics by lowest percent correct first
+  const sortedTopics = Object.keys(weakAreas).sort((a, b) => {
+    const pa = weakAreas[a].total ? weakAreas[a].correct / weakAreas[a].total : 0;
+    const pb = weakAreas[b].total ? weakAreas[b].correct / weakAreas[b].total : 0;
+    return pa - pb;
+  });
+
+  sortedTopics.forEach(topic => {
+    const t = weakAreas[topic];
+    const percent = t.total ? Math.round((t.correct / t.total) * 100) : 0;
+    let priority = "";
+    if (percent < 50) priority = "High priority – focus heavily";
+    else if (percent < 75) priority = "Medium priority – review key concepts";
+    else priority = "Low priority – light review";
+
+    // Suggested study areas (can be expanded later)
+    let focusPoints = "";
+    switch(topic) {
+      case "Codes":
+        focusPoints = "Egress calculations, occupant loads, corridor widths, door swing directions";
+        break;
+      case "Accessibility":
+        focusPoints = "ADA clearances, turning radii, reach ranges, signage requirements";
+        break;
+      case "Programming":
+        focusPoints = "Net-to-gross calculations, space planning, square footage formulas";
+        break;
+      case "Electrical":
+        focusPoints = "Lighting levels, task vs. ambient lighting, circuit planning";
+        break;
+      default:
+        focusPoints = "Review relevant concepts";
+    }
+
+    html += `<li><strong>${topic}</strong> – ${priority} (${percent}% correct)<br>`;
+    html += `Suggested focus: ${focusPoints}</li>`;
+  });
+
   html += "</ul>";
 
   resultsDiv.innerHTML = html;
