@@ -10,51 +10,99 @@
 
 <div class="container">
   <h1>Focused Study Notes</h1>
-  <p>Use these notes to review weak areas with real code references.</p>
+  <p>These notes are tailored to your weak areas and the questions you missed.</p>
 
-  <section>
-    <h2>Codes</h2>
-    <ul>
-      <li><strong>Egress:</strong> Minimum corridor width 44" (IBC 1018.2)</li>
-      <li><strong>Occupant load:</strong> IBC Table 1004.1.2</li>
-      <li><strong>Doors:</strong> Must swing in direction of egress travel when occupant load > 50</li>
-    </ul>
-    <p><em>Reference:</em> International Building Code (IBC 2021)</p>
-  </section>
+  <div id="notes"></div>
 
-  <section>
-    <h2>Accessibility</h2>
-    <ul>
-      <li><strong>Turning radius:</strong> 60" diameter circle (ADA 304.3.1)</li>
-      <li><strong>Clear floor space:</strong> 30" x 48" minimum (ADA 305)</li>
-      <li><strong>Reach ranges:</strong> 15"–48" AFF (ADA 308)</li>
-    </ul>
-    <p><em>Reference:</em> 2010 ADA Standards for Accessible Design</p>
-  </section>
-
-  <section>
-    <h2>Programming</h2>
-    <ul>
-      <li><strong>Net-to-gross factor:</strong> Typically 60–80%</li>
-      <li><strong>Space planning:</strong> Use adjacency matrices & bubble diagrams</li>
-    </ul>
-    <p><em>Reference:</em> NCIDQ PRAC Exam Guide, Ballast</p>
-  </section>
-
-  <section>
-    <h2>Electrical</h2>
-    <ul>
-      <li><strong>Task lighting:</strong> 30–50 footcandles</li>
-      <li><strong>Ambient lighting:</strong> 10–20 footcandles</li>
-      <li><strong>Switch locations:</strong> Typically 44"–48" AFF</li>
-    </ul>
-    <p><em>Reference:</em> IESNA Lighting Handbook</p>
-  </section>
+  <h2>Review Missed Questions</h2>
+  <div id="missed"></div>
 
   <div style="margin-top:20px;">
     <a href="index.html" class="btn">⬅ Back to Quiz</a>
   </div>
 </div>
+
+<script>
+const allNotes = {
+  "Codes": `
+    <section>
+      <h2>Codes</h2>
+      <ul>
+        <li><strong>Egress:</strong> Minimum corridor width 44" (IBC 1018.2)</li>
+        <li><strong>Occupant load:</strong> IBC Table 1004.1.2</li>
+        <li><strong>Doors:</strong> Must swing in direction of egress travel when occupant load > 50</li>
+      </ul>
+      <p><em>Reference:</em> International Building Code (IBC 2021)</p>
+    </section>
+  `,
+  "Accessibility": `
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li><strong>Turning radius:</strong> 60" diameter circle (ADA 304.3.1)</li>
+        <li><strong>Clear floor space:</strong> 30" x 48" minimum (ADA 305)</li>
+        <li><strong>Reach ranges:</strong> 15"–48" AFF (ADA 308)</li>
+      </ul>
+      <p><em>Reference:</em> 2010 ADA Standards for Accessible Design</p>
+    </section>
+  `,
+  "Programming": `
+    <section>
+      <h2>Programming</h2>
+      <ul>
+        <li><strong>Net-to-gross factor:</strong> Typically 60–80%</li>
+        <li><strong>Space planning:</strong> Use adjacency matrices & bubble diagrams</li>
+      </ul>
+      <p><em>Reference:</em> NCIDQ PRAC Exam Guide, Ballast</p>
+    </section>
+  `,
+  "Electrical": `
+    <section>
+      <h2>Electrical</h2>
+      <ul>
+        <li><strong>Task lighting:</strong> 30–50 footcandles</li>
+        <li><strong>Ambient lighting:</strong> 10–20 footcandles</li>
+        <li><strong>Switch locations:</strong> Typically 44"–48" AFF</li>
+      </ul>
+      <p><em>Reference:</em> IESNA Lighting Handbook</p>
+    </section>
+  `
+};
+
+// Load saved study plan
+const studyPlan = JSON.parse(localStorage.getItem("studyPlan")) || {};
+const missedQuestions = JSON.parse(localStorage.getItem("missedQuestions")) || [];
+
+const notesDiv = document.getElementById("notes");
+const missedDiv = document.getElementById("missed");
+
+// Show focused notes
+if (Object.keys(studyPlan).length === 0) {
+  notesDiv.innerHTML = "<p>🎉 You didn’t miss any categories badly enough to need focused notes. Great work!</p>";
+} else {
+  for (const category of Object.keys(studyPlan)) {
+    notesDiv.innerHTML += allNotes[category] || "";
+  }
+}
+
+// Show missed questions
+if (missedQuestions.length === 0) {
+  missedDiv.innerHTML = "<p>✅ You answered all questions correctly!</p>";
+} else {
+  missedQuestions.forEach((q, index) => {
+    const userAnswer = q.options[q.userAnswer] || "No answer selected";
+    const correctAnswer = q.options[q.answer];
+    missedDiv.innerHTML += `
+      <div class="result incorrect">
+        <p><strong>Q${index + 1}:</strong> ${q.question}</p>
+        <p><strong>Your Answer:</strong> ${userAnswer}</p>
+        <p><strong>Correct Answer:</strong> ${correctAnswer}</p>
+        <p><strong>Explanation:</strong> ${q.explanation}</p>
+      </div>
+    `;
+  });
+}
+</script>
 
 </body>
 </html>
