@@ -129,7 +129,13 @@ function showResults() {
 
   // Clear storage after rendering
   localStorage.clear();
-  
+
+  // Save missed categories to localStorage
+localStorage.setItem("studyPlan", JSON.stringify(studyPlan));
+
+// Show study notes link
+document.getElementById("studyNotesLink").style.display = "block";
+
   // Show study notes link after results
 document.getElementById("studyNotesLink").style.display = "block";
 
