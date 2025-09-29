@@ -1,45 +1,84 @@
-/* ---------- Accordion ---------- */
-.accordion {
-  margin-top: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Focused Study Notes</h1>
+    <p>Based on your quiz results, review the detailed notes below. Expand each section to study code excerpts, accessibility rules, and references.</p>
 
-.accordion-btn {
-  width: 100%;
-  text-align: left;
-  padding: 14px 18px;
-  font-size: 1.05rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 6px;
-  background-color: #0073e6;
-  color: #fff;
-  margin-bottom: 8px;
-  transition: background 0.3s;
-}
+    <div class="accordion">
+      <button class="accordion-btn">Codes & Building Regulations</button>
+      <div class="accordion-panel">
+        <h3>Key Notes</h3>
+        <ul>
+          <li>IBC classifies occupancy into groups (A, B, E, etc.).</li>
+          <li>Corridor widths: typically 44" minimum for most occupancies.</li>
+          <li>Doors in egress must swing in direction of travel when serving 50+ occupants.</li>
+        </ul>
+        <h3>References</h3>
+        <p>IBC 2021, Chapters 3–10</p>
+      </div>
 
-.accordion-btn:hover {
-  background-color: #005bb5;
-}
+      <button class="accordion-btn">Accessibility (ADA / ICC A117.1)</button>
+      <div class="accordion-panel">
+        <h3>Key Notes</h3>
+        <ul>
+          <li>Accessible routes: 36" min clear width, 32" min at door clearances.</li>
+          <li>Turning space: 60" diameter circle or T-shaped space.</li>
+          <li>Clear floor space at fixtures: 30" × 48".</li>
+        </ul>
+        <h3>References</h3>
+        <p>2010 ADA Standards, ICC A117.1-2017</p>
+      </div>
 
-.accordion-btn.active {
-  background-color: #004a8f;
-}
+      <button class="accordion-btn">Programming & Space Planning</button>
+      <div class="accordion-panel">
+        <h3>Key Notes</h3>
+        <ul>
+          <li>Bubble diagrams → adjacency matrices → block plans → test fits.</li>
+          <li>Client program must align with occupancy type and code requirements.</li>
+          <li>Consider load factors: Office (B) = 100 gross sf/occupant.</li>
+        </ul>
+        <h3>References</h3>
+        <p>NCIDQ CIDQ Content Areas, IBC Ch. 10</p>
+      </div>
 
-.accordion-panel {
-  background: #f9f9f9;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  padding: 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-}
+      <button class="accordion-btn">Electrical & Lighting</button>
+      <div class="accordion-panel">
+        <h3>Key Notes</h3>
+        <ul>
+          <li>Outlet spacing: 12' max along walls, within 6' of any point.</li>
+          <li>Dedicated circuits for kitchen appliances, copiers, or servers.</li>
+          <li>Emergency egress lighting must remain on during power outage (battery or generator).</li>
+        </ul>
+        <h3>References</h3>
+        <p>NEC 2020, IBC Ch. 10</p>
+      </div>
+    </div>
 
-.accordion-panel h3 {
-  margin-top: 12px;
-}
+    <p style="text-align:center; margin-top:30px;">
+      <a href="index.html" class="btn">⬅ Back to Quiz</a>
+    </p>
+  </div>
 
-.accordion-panel ul {
-  padding-left: 20px;
-}
+  <script>
+    // Accordion behavior
+    document.querySelectorAll(".accordion-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
