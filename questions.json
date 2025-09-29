@@ -1,39 +1,34 @@
 [
-  {
-    "id": 1,
-    "topic": "Codes",
-    "question": "You are designing a small public library room with an occupant load of 45. Which statement is correct regarding egress?",
-    "options": {
-      "A": "The corridor width can be 36 inches since the occupant load is under 50.",
-      "B": "A wheelchair turning radius of 60 inches must be provided at the end of each row of tables.",
-      "C": "Only one exit is required because the occupant load is under 50, but the door must swing in the direction of egress.",
-      "D": "Shelving can be placed without any clearance because it is against a wall."
-    },
-    "correct": "C",
-    "explanation": "Occupant loads under 50 require only one exit. Exit doors must swing in direction of egress if thresholds are exceeded."
-  },
-  {
-    "id": 2,
-    "topic": "Accessibility",
-    "question": "What is the minimum clear floor space required for a wheelchair to make a 360° turn?",
-    "options": { "A": "48 inches", "B": "60 inches", "C": "36 inches", "D": "42 inches" },
-    "correct": "B",
-    "explanation": "ADA standards require a 60-inch diameter circle for a full wheelchair turning radius."
-  },
-  {
-    "id": 3,
-    "topic": "Programming",
-    "question": "For a small office space, the net area is 1200 sq ft. Using a net-to-gross multiplier of 1.2, what is the approximate gross area?",
-    "options": { "A": "1000 sq ft", "B": "1440 sq ft", "C": "1200 sq ft", "D": "1500 sq ft" },
-    "correct": "B",
-    "explanation": "Gross area = Net area × multiplier = 1200 × 1.2 = 1440 sq ft."
-  },
-  {
-    "id": 4,
-    "topic": "Electrical",
-    "question": "An office requires a task lighting level of 35 footcandles at desk surfaces. Which is correct?",
-    "options": { "A": "Provide general ambient lighting at 10 fc", "B": "Task lighting at 35 fc is adequate", "C": "Task lighting must exceed 50 fc", "D": "Ambient lighting should be reduced to 5 fc" },
-    "correct": "B",
-    "explanation": "Typical office task lighting requires 30–50 footcandles at desk surfaces; 35 fc meets this requirement."
-  }
-]
+  {"id":1,"topic":"Codes","question":"Minimum clear width for an accessible route in a commercial building?","options":{"A":"28 inches","B":"32 inches","C":"36 inches","D":"42 inches"},"correct":"C","explanation":"2010 ADA Standards, Section 403: Minimum clear width is 36 inches."},
+  {"id":2,"topic":"Codes","question":"Maximum allowable travel distance to an exit in a sprinklered building?","options":{"A":"100 feet","B":"150 feet","C":"200 feet","D":"250 feet"},"correct":"C","explanation":"NFPA 101, 2018 Edition: Maximum travel distance is 200 feet."},
+  {"id":3,"topic":"Codes","question":"Minimum corridor width in a healthcare facility?","options":{"A":"4 feet","B":"5 feet","C":"6 feet","D":"8 feet"},"correct":"B","explanation":"FGI Guidelines 2018: Minimum corridor width is 5 feet."},
+  {"id":4,"topic":"Codes","question":"Which occupancy group requires a fire alarm system?","options":{"A":"Group A","B":"Group B","C":"Group E","D":"Group F"},"correct":"A","explanation":"IBC 2021: Group A (assembly) requires fire alarm systems."},
+  {"id":5,"topic":"Codes","question":"Minimum required ceiling height in an accessible restroom?","options":{"A":"7 feet","B":"7 feet 6 inches","C":"8 feet","D":"8 feet 6 inches"},"correct":"C","explanation":"2010 ADA Standards: Minimum ceiling height is 8 feet."},
+  {"id":6,"topic":"Codes","question":"Requirement for accessible parking space location?","options":{"A":"Shortest accessible route to building","B":"On highest floor","C":"Near stairwell","D":"Within 100 ft of entrance"},"correct":"A","explanation":"2010 ADA Standards: Accessible parking must be on the shortest accessible route to the building."},
+  {"id":7,"topic":"Codes","question":"Minimum width for an accessible door?","options":{"A":"28 inches","B":"32 inches","C":"36 inches","D":"40 inches"},"correct":"B","explanation":"2010 ADA Standards: Minimum clear width for doors is 32 inches."},
+  {"id":8,"topic":"Codes","question":"Requirements for accessible signage?","options":{"A":"Latch side placement","B":"Height 48-60 inches","C":"Non-glare finish","D":"All of the above"},"correct":"D","explanation":"2010 ADA Standards: All listed requirements apply."},
+  {"id":9,"topic":"Codes","question":"Minimum clear floor space for a wheelchair 180-degree turn?","options":{"A":"60 inches diameter","B":"60x60 inches","C":"72 inches diameter","D":"72x72 inches"},"correct":"A","explanation":"2010 ADA Standards: 60 inches diameter is required for a 180-degree turn."},
+  {"id":10,"topic":"Codes","question":"Accessible toilet stall requirements?","options":{"A":"Depth 56 inches","B":"Width 60 inches","C":"Door width 32 inches","D":"All of the above"},"correct":"D","explanation":"2010 ADA Standards: Accessible toilet stalls must meet all listed dimensions."},
+  {"id":11,"topic":"Accessibility","question":"Minimum clear width for an accessible route in a public facility?","options":{"A":"32 inches","B":"36 inches","C":"40 inches","D":"44 inches"},"correct":"B","explanation":"2010 ADA Standards: 36 inches minimum for accessible routes in public facilities."},
+  {"id":12,"topic":"Accessibility","question":"Turning space required for wheelchair?","options":{"A":"48 inches diameter","B":"54 inches diameter","C":"60 inches diameter","D":"72 inches diameter"},"correct":"C","explanation":"2010 ADA Standards: Minimum turning space is 60 inches diameter or T-shaped equivalent."},
+  {"id":13,"topic":"Accessibility","question":"Accessible drinking fountain spout height?","options":{"A":"30-36 inches","B":"36-43 inches","C":"42-48 inches","D":"48-54 inches"},"correct":"B","explanation":"2010 ADA Standards: Accessible drinking fountains spout height must be 36-43 inches."},
+  {"id":14,"topic":"Accessibility","question":"Accessible toilet paper dispenser reach range?","options":{"A":"15-30 inches","B":"19-48 inches","C":"20-50 inches","D":"25-55 inches"},"correct":"B","explanation":"2010 ADA Standards: Toilet paper dispensers must be 19-48 inches from floor."},
+  {"id":15,"topic":"Accessibility","question":"Minimum knee clearance at accessible sink?","options":{"A":"27 inches","B":"28 inches","C":"30 inches","D":"32 inches"},"correct":"A","explanation":"2010 ADA Standards: Minimum knee clearance is 27 inches above the floor."},
+  {"id":16,"topic":"Programming","question":"Recommended occupant load factor for office (Business occupancy)?","options":{"A":"100 gross SF/person","B":"150 gross SF/person","C":"200 gross SF/person","D":"250 gross SF/person"},"correct":"A","explanation":"IBC 2021, Chapter 10: Office occupancy load factor is 100 gross SF/person."},
+  {"id":17,"topic":"Programming","question":"First step in space planning program process?","options":{"A":"Block plans","B":"Bubble diagrams","C":"Adjacency matrices","D":"Test fits"},"correct":"B","explanation":"NCIDQ CIDQ content: Bubble diagrams are first step in space planning process."},
+  {"id":18,"topic":"Programming","question":"What is the correct sequence for space planning?","options":{"A":"Test fits → Block plans → Bubble diagrams → Adjacency matrices","B":"Bubble diagrams → Adjacency matrices → Block plans → Test fits","C":"Adjacency matrices → Bubble diagrams → Test fits → Block plans","D":"Block plans → Test fits → Adjacency matrices → Bubble diagrams"},"correct":"B","explanation":"NCIDQ CIDQ content: Recommended order is Bubble diagrams → Adjacency matrices → Block plans → Test fits."},
+  {"id":19,"topic":"Programming","question":"Minimum space per workstation for standard office?","options":{"A":"48 SF","B":"60 SF","C":"100 SF","D":"120 SF"},"correct":"C","explanation":"NCIDQ CIDQ content: Minimum space per workstation is 100 SF gross."},
+  {"id":20,"topic":"Programming","question":"Which diagram shows relationships between spaces?","options":{"A":"Bubble diagram","B":"Block plan","C":"Adjacency matrix","D":"Furniture layout"},"correct":"C","explanation":"Adjacency matrices show the relationships between spaces in programming."},
+  {"id":21,"topic":"Programming","question":"Test fits are used to determine?","options":{"A":"Furniture layout","B":"Circulation and efficiency","C":"Construction type","D":"Ceiling heights"},"correct":"B","explanation":"Test fits verify circulation and efficiency for proposed layouts."},
+  {"id":22,"topic":"Programming","question":"Primary consideration when programming an educational facility?","options":{"A":"Room finish materials","B":"Occupant load and function","C":"Lighting levels","D":"HVAC type"},"correct":"B","explanation":"NCIDQ CIDQ: Educational facilities must prioritize occupant load and function."},
+  {"id":23,"topic":"Programming","question":"Which type of diagram helps identify space adjacencies?","options":{"A":"Bubble diagram","B":"Block plan","C":"Furniture plan","D":"Electrical plan"},"correct":"A","explanation":"Bubble diagrams help identify space adjacencies visually."},
+  {"id":24,"topic":"Programming","question":"Gross area calculation includes?","options":{"A":"Only usable area","B":"Usable area + circulation + walls","C":"Furniture footprint only","D":"Mechanical rooms only"},"correct":"B","explanation":"Gross area = usable area + circulation + walls. (NCIDQ CIDQ content)"},
+  {"id":25,"topic":"Programming","question":"Factor that most affects space planning efficiency?","options":{"A":"Finishes","B":"Occupancy density","C":"Lighting type","D":"HVAC system"},"correct":"B","explanation":"Occupancy density directly affects space planning efficiency. (NCIDQ CIDQ content)"},
+  {"id":26,"topic":"Electrical","question":"Minimum spacing for general wall outlets in a residential room?","options":{"A":"8 feet","B":"12 feet","C":"14 feet","D":"16 feet"},"correct":"B","explanation":"NEC 2020, Article 210.52: Outlets must be spaced no more than 12 feet apart along walls."},
+  {"id":27,"topic":"Electrical","question":"Dedicated circuit requirement for kitchen appliances?","options":{"A":"No","B":"Yes, for each major appliance","C":"Only for refrigerator","D":"Only for oven"},"correct":"B","explanation":"NEC 2020: Each major kitchen appliance must have a dedicated circuit."},
+  {"id":28,"topic":"Electrical","question":"Emergency egress lighting must remain on for how long?","options":{"A":"15 minutes","B":"30 minutes","C":"90 minutes","D":"120 minutes"},"correct":"C","explanation":"IBC 2021: Emergency egress lighting must remain on for 90 minutes during power outage."},
+  {"id":29,"topic":"Electrical","question":"Maximum distance between emergency exit signs?","options":{"A":"50 feet","B":"75 feet","C":"100 feet","D":"150 feet"},"correct":"C","explanation":"IBC 2021: Exit signs must be spaced so that travel distance to an exit does not exceed 100 feet."},
+  {"id":30,"topic":"Electrical","question":"Minimum clearance for lighting fixture above floor in corridors?","options":{"A":"6 feet 8 inches","B":"7 feet","C":"7 feet 6 inches","D":"8 feet"},"correct":"B","explanation":"IBC 2021: Minimum clearance for lighting fixtures in corridors is 7 feet."},
+  {"id":31,"topic":"Electrical","question":"Dedicated circuit required for server room equipment?","options":{"A":"Yes","B":"No","C":"Only if load exceeds 20A","D":"Only if computer exceeds 2 kW"},"correct":"A","explanation":"NEC 2020: Server room equipment requires dedicated circuits."},
+  {"id":32,"topic":"Electrical","question":"Lighting control requirement for accessible switches?","options":{"A":"36 inches above floor","B":"48 inches above floor","C":"54 inches above floor","D":"60 inches above floor"},"correct":"B","explanation":"2010 ADA Standards: Operable parts must be 48 inches maximum above floor."},
+
