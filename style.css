@@ -129,3 +129,49 @@ ul.options label:hover {
   text-align: center;
   margin-top: 25px;
 }
+
+/* ---------- Accordion ---------- */
+.accordion {
+  margin-top: 20px;
+}
+
+.accordion-btn {
+  width: 100%;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #0073e6;
+  color: #fff;
+  margin-bottom: 8px;
+  transition: background 0.3s;
+}
+
+.accordion-btn:hover {
+  background-color: #005bb5;
+}
+
+.accordion-btn.active {
+  background-color: #004a8f;
+}
+
+.accordion-panel {
+  background: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.accordion-panel h3 {
+  margin-top: 12px;
+}
+
+.accordion-panel ul {
+  padding-left: 20px;
+}
